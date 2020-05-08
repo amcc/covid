@@ -1,0 +1,24 @@
+margin: 0;
+  padding: 0;
+  margin: 0
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 300;
+canvas {
+  display: block;
+}
+button {
+  border: 0;
+  border-radius: 3px;
+  background: tomato;
+  color: white;
+  font-size: 1em;
+  font-family: "Roboto Mono";
+  padding: 7px;
+  transition: all 0.5s ease;
+}
+button:active {
+  background: dodgerBlue;
+}
+button:focus {
+  background: dodgerBlue;
+}
