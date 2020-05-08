@@ -30,6 +30,7 @@ button:hover {
   position: fixed;
   bottom: 0;
   left: 10px;
+  padding-bottom: 2em;
   font-size: 1rem;
 }
 #info a {
