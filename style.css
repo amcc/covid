@@ -23,6 +23,9 @@ button:active {
 button:focus {
   background: dodgerBlue;
 }
+button:hover {
+  background: dodgerBlue;
+}
 #info {
   position: fixed;
   bottom: 0;
