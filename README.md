@@ -6,12 +6,7 @@ https://amcc.github.io/covid/
 
 
 
-_I'm pretty sick of checking stats on complicated ugly pages._ 
-
-They are often very hard to use on a mobile, not always the data you want. But the UK govenment page is actually clear and simple, plus they give you the JSON:
-https://coronavirus.data.gov.uk/
-
-**Give suggestions and I'll output the way you want - talk to me here: https://twitter.com/mcclymont**
+_I'm pretty sick of checking stats on complicated ugly pages._ They are often very hard to use on a mobile, not always the data you want. But the UK govenment page is actually clear and simple, plus they give you the JSON: https://coronavirus.data.gov.uk/ **Give suggestions and I'll output the way you want - talk to me here: https://twitter.com/mcclymont**
 
 
 See the graph in action here: https://amcc.github.io/covid
