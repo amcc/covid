@@ -1,2 +1,7 @@
 # covid
-Using the UK governments coronavirus data with p5js
+
+Using the UK governments published figures for Coronavirus deaths p5js has been used to create a graph.
+
+You can see the p5js sketch here: https://editor.p5js.org/amcc/sketches/WZXCnLuXw
+
+Feel free to use any of the code
