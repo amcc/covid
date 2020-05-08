@@ -1,6 +1,13 @@
 # covid
 
-Using the UK governments published figures for Coronavirus deaths p5js has been used to create a graph.
+Graph of coronavirus daily deaths using UK gov data with @p5xjs: 
+
+https://amcc.github.io/covid/
+
+
+
+_pretty sick of checking stats on complicated ugly pages. Give suggestions and I'll output the way you want - talk to me here: https://twitter.com/mcclymont_
+
 
 See the graph in action here: https://amcc.github.io/covid
 
