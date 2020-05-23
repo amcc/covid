@@ -112,4 +112,6 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  animate = true;
+  easeValue = startEaseValue
 }
