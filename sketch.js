@@ -2,11 +2,14 @@
 // https://coronavirus.data.gov.uk/;
 let url = 'https://c19downloads.azureedge.net/downloads/json/coronavirus-deaths_latest.json'
 
-let currentCountry = "England"
+let currentCountry = "United Kingdom"
 
-let startEaseValue = 100
+let startEaseValue = 101
 let ease = 2
 let easeValue = startEaseValue
+let animate = true
+
+let bigArray = []
 
 function preload() {
   // Preload the data
@@ -17,13 +20,17 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // make buttons
-  let x  = 10
-  let y  = 10
+  let x = 10
+  let y = 10
   let buttonHeight = 40
-  makeButton("Wales", x, y)
+  makeButton("United Kingdom", x, y, focus)
   makeButton("Scotland", x, y + buttonHeight)
-  makeButton("Northern Ireland", x, y + buttonHeight*2)
-  makeButton("England", x, y + buttonHeight*3, focus)
+  makeButton("Northern Ireland", x, y + buttonHeight * 2)
+  makeButton("England", x, y + buttonHeight * 3)
+  makeButton("Wales", x, y + buttonHeight * 4)
+  
+  bigArray = deaths.countries.concat(deaths.overview);
+  // console.log(bigArray)
 }
 
 function gotData(data) {
@@ -32,25 +39,50 @@ function gotData(data) {
 }
 
 function makeGraph() {
-  background(0);
+  background("black");
   fill(255, 255, 255)
   noStroke()
   // multiplier allows graph to progress along axis
   // its the length of the array divided by number of countries
   // minus a small amount to space it from the end of the canvas
-  let mulitplier = (width / (deaths.countries.length / 4)) - 2.3
-  deaths.countries
+  let mulitplier = (width / (deaths.countries.length / 4)) - 2
+  
+  bigArray
     .filter(country => country.areaName === currentCountry)
     .map((country, index) => {
+      // console.log(country)
       // if there's no value make it zero
       let diameter = country.dailyChangeInDeaths ? country.dailyChangeInDeaths : 0
       // draw from right to left due to the order of the array
       // progress along with the 'multiplier' removing a small amount for spacing
       // also use multiplier to determine width of ellipse (with modifier)
       // use diameter value to determine height of ellipse
-      ellipse(width - index * mulitplier - 15, height / 2, mulitplier / 5, (diameter / 1.6) / easeValue)
+      // ((index % 7) === 0) ? fill(0) : fill("gray")
+      if(index % 7 === 0) {
+        fill("tomato")
+      } else {
+        fill("white")
+      }
+    
+      rect(width - index * mulitplier - 45, height - 20, mulitplier / 5, -(diameter / 1.6) / easeValue)
+      if (country.dailyChangeInDeaths) {
+        let amount = country.dailyChangeInDeaths.toString();
+        textSize(12);
+        if(index % 7 === 0) {
+        fill("tomato")
+      } else {
+        fill("white")
+      }
+        if (index == 0) {
+          textSize(20)
+        }
+        text(amount, (width - index * mulitplier - 40), height - 12 - (diameter / 1.6) / easeValue)
+      }
+
     })
 }
+
+function showText() {}
 
 // make buttons - pass in country, x and y as params
 // when the button is pressed, return the country and re-make the graph
@@ -60,6 +92,7 @@ function makeButton(country, x, y, focus = false) {
   button.mousePressed(() => {
     currentCountry = country
     easeValue = startEaseValue
+    animate = true
   });
   if (focus) button.elt.focus()
 }
@@ -67,9 +100,12 @@ function makeButton(country, x, y, focus = false) {
 function draw() {
   // ease the size of the graph
   easeValue -= ease
-  if (easeValue < 1) easeValue = 1
-  // draw the graph
-  makeGraph()
+  if (animate) makeGraph()
+  if (easeValue <= 1) {
+    easeValue = 1
+    animate = false;
+    // draw the graph  
+  }
 }
 
 function windowResized() {
