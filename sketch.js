@@ -46,7 +46,9 @@ function makeGraph() {
   // its the length of the array divided by number of countries
   // minus a small amount to space it from the end of the canvas
   let mulitplier = (width / (deaths.countries.length / 4)) - 2
-  
+  // scale(0.97)
+  // translate(130,-100)
+  // rotate(0.15)
   bigArray
     .filter(country => country.areaName === currentCountry)
     .map((country, index) => {
@@ -61,22 +63,22 @@ function makeGraph() {
       if(index % 7 === 0) {
         fill("tomato")
       } else {
-        fill("white")
+        fill("gray")
       }
-    
-      rect(width - index * mulitplier - 45, height - 20, mulitplier / 5, -(diameter / 1.6) / easeValue)
+      // rotate(-0.005)
+      rect(width - index * mulitplier - 58, height - 20, mulitplier/1.5, -(diameter / 1.6) / easeValue)
       if (country.dailyChangeInDeaths) {
         let amount = country.dailyChangeInDeaths.toString();
         textSize(12);
         if(index % 7 === 0) {
         fill("tomato")
       } else {
-        fill("white")
+        fill(255,255,255,180)
       }
         if (index == 0) {
           textSize(20)
         }
-        text(amount, (width - index * mulitplier - 40), height - 12 - (diameter / 1.6) / easeValue)
+        text(amount, (width - index * mulitplier - 52), height -20 - (diameter / 1.6) / easeValue)
       }
 
     })
