@@ -9,8 +9,8 @@ canvas {
 }
 button {
   border: 0;
-  border-radius: 3px;
-  background: tomato;
+  border-radius: 0px;
+  background: gray;
   color: white;
   font-size: 1em;
   font-family: "Roboto Mono";
@@ -18,21 +18,8 @@ button {
   transition: all 0.5s ease;
 }
 button:active {
-  background: dodgerBlue;
+  background: tomato;
 }
 button:focus {
-  background: dodgerBlue;
-}
-button:hover {
-  background: dodgerBlue;
-}
-#info {
-  position: fixed;
-  bottom: 0;
-  left: 10px;
-  padding-bottom: 2em;
-  font-size: 1rem;
-}
-#info a {
-  color: gray;
+  background: tomato;
 }
