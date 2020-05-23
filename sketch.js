@@ -41,11 +41,12 @@ function gotData(data) {
 function makeGraph() {
   background("black");
   fill(255, 255, 255)
-  
+
   // multiplier allows graph to progress along axis
   // its the length of the array divided by number of countries
   // minus a small amount to space it from the end of the canvas
   let mulitplier = (width / (deaths.countries.length / 4)) - 2
+  let heightScale = (height)/(mouseY+height/2)
   // scale(0.97)
   // translate(130,-100)
   // rotate(0.15)
@@ -60,8 +61,10 @@ function makeGraph() {
     .map((country, index) => {
       // console.log(country)
       // if there's no value make it zero
-      let diameter = country.dailyChangeInDeaths ? country.dailyChangeInDeaths : 0
-      // draw from right to left due to the order of the array
+      let diameter = country.dailyChangeInDeaths ? country.dailyChangeInDeaths * heightScale : 0
+
+    
+    // draw from right to left due to the order of the array
       // progress along with the 'multiplier' removing a small amount for spacing
       // also use multiplier to determine width of ellipse (with modifier)
       // use diameter value to determine height of ellipse
@@ -88,19 +91,19 @@ function makeGraph() {
         }
         text(amount, (width - index * mulitplier - 52), height - 20 - (diameter / 1.6) / easeValue)
         if (index % 7 === 0) {
-        noFill()
+          noFill()
           stroke(140, 50)
           strokeWeight(100);
           curveVertex(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
-          
-point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
-      } 
+
+          point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
+        }
       }
 
     })
   noFill()
-  
-          strokeWeight(1);
+
+  strokeWeight(1);
   stroke(255, 40)
   endShape()
 }
@@ -122,11 +125,15 @@ function makeButton(country, x, y, focus = false) {
 
 function draw() {
   // ease the size of the graph
-  easeValue -= ease
+  if (easeValue - ease > 1) {
+    easeValue -= ease
+  } else {
+    easeValue = 1
+  }
   if (animate) makeGraph()
   if (easeValue <= 1) {
     easeValue = 1
-    animate = false;
+    // animate = false;
     // draw the graph  
   }
 }
