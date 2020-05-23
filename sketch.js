@@ -28,7 +28,7 @@ function setup() {
   makeButton("Northern Ireland", x, y + buttonHeight * 2)
   makeButton("England", x, y + buttonHeight * 3)
   makeButton("Wales", x, y + buttonHeight * 4)
-  
+
   bigArray = deaths.countries.concat(deaths.overview);
   // console.log(bigArray)
 }
@@ -41,7 +41,7 @@ function gotData(data) {
 function makeGraph() {
   background("black");
   fill(255, 255, 255)
-  noStroke()
+  
   // multiplier allows graph to progress along axis
   // its the length of the array divided by number of countries
   // minus a small amount to space it from the end of the canvas
@@ -49,6 +49,12 @@ function makeGraph() {
   // scale(0.97)
   // translate(130,-100)
   // rotate(0.15)
+
+  // make bezier
+  stroke(255)
+  strokeWeight(5);
+  noFill();
+  beginShape();
   bigArray
     .filter(country => country.areaName === currentCountry)
     .map((country, index) => {
@@ -60,28 +66,43 @@ function makeGraph() {
       // also use multiplier to determine width of ellipse (with modifier)
       // use diameter value to determine height of ellipse
       // ((index % 7) === 0) ? fill(0) : fill("gray")
-      if(index % 7 === 0) {
+      noStroke()
+      if (index % 7 === 0) {
         fill("tomato")
       } else {
         fill("gray")
       }
       // rotate(-0.005)
-      rect(width - index * mulitplier - 58, height - 20, mulitplier/1.5, -(diameter / 1.6) / easeValue)
+      rect(width - index * mulitplier - 58, height - 20, mulitplier, -(diameter / 1.6) / easeValue, 0, 0, 10, 0)
       if (country.dailyChangeInDeaths) {
         let amount = country.dailyChangeInDeaths.toString();
         textSize(12);
-        if(index % 7 === 0) {
-        fill("tomato")
-      } else {
-        fill(255,255,255,180)
-      }
+        if (index % 7 === 0) {
+          fill("tomato")
+        } else {
+          fill(255, 255, 255, 180)
+        }
         if (index == 0) {
           textSize(20)
+          curveVertex(width - index * mulitplier - 50, height - 20 - (diameter / 1.6) / easeValue);
         }
-        text(amount, (width - index * mulitplier - 52), height -20 - (diameter / 1.6) / easeValue)
+        text(amount, (width - index * mulitplier - 52), height - 20 - (diameter / 1.6) / easeValue)
+        if (index % 7 === 0) {
+        noFill()
+          stroke(140, 50)
+          strokeWeight(100);
+          curveVertex(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
+          
+point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
+      } 
       }
 
     })
+  noFill()
+  
+          strokeWeight(1);
+  stroke(255, 40)
+  endShape()
 }
 
 function showText() {}
