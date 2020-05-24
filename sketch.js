@@ -35,7 +35,7 @@ function setup() {
 
   slider = createSlider(0, 5, 0.7, 0.01);
   slider.position(10, 10);
-  slider.style('width', width - 100 + 'px');
+  slider.style('width', width/2 + 'px');
 }
 
 function gotData(data) {
