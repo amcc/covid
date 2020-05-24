@@ -8,6 +8,7 @@ let startEaseValue = 101
 let ease = 2
 let easeValue = startEaseValue
 let animate = true
+let slider
 
 let bigArray = []
 
@@ -21,7 +22,7 @@ function setup() {
 
   // make buttons
   let x = 10
-  let y = 10
+  let y = 40
   let buttonHeight = 40
   makeButton("United Kingdom", x, y, focus)
   makeButton("Scotland", x, y + buttonHeight)
@@ -31,6 +32,10 @@ function setup() {
 
   bigArray = deaths.countries.concat(deaths.overview);
   // console.log(bigArray)
+
+  slider = createSlider(0, 5, 0.7, 0.01);
+  slider.position(10, 10);
+  slider.style('width', width - 100 + 'px');
 }
 
 function gotData(data) {
@@ -46,16 +51,14 @@ function makeGraph() {
   // its the length of the array divided by number of countries
   // minus a small amount to space it from the end of the canvas
   let mulitplier = (width / (deaths.countries.length / 4)) - 2
-  let heightScale = (height)/(mouseY+height/2)
+  let heightScale = (slider.value())
   // scale(0.97)
   // translate(130,-100)
   // rotate(0.15)
 
   // make bezier
-  stroke(255)
-  strokeWeight(5);
   noFill();
-  beginShape();
+  // beginShape();
   bigArray
     .filter(country => country.areaName === currentCountry)
     .map((country, index) => {
@@ -63,8 +66,8 @@ function makeGraph() {
       // if there's no value make it zero
       let diameter = country.dailyChangeInDeaths ? country.dailyChangeInDeaths * heightScale : 0
 
-    
-    // draw from right to left due to the order of the array
+
+      // draw from right to left due to the order of the array
       // progress along with the 'multiplier' removing a small amount for spacing
       // also use multiplier to determine width of ellipse (with modifier)
       // use diameter value to determine height of ellipse
@@ -76,36 +79,38 @@ function makeGraph() {
         fill("gray")
       }
       // rotate(-0.005)
-      rect(width - index * mulitplier - 58, height - 20, mulitplier, -(diameter / 1.6) / easeValue, 0, 0, 10, 0)
+      rect(width - index * mulitplier - 58, height - 20, mulitplier, -(diameter / 1.6) / easeValue, 0, 0, 10, 10)
       if (country.dailyChangeInDeaths) {
         let amount = country.dailyChangeInDeaths.toString();
         textSize(12);
         if (index % 7 === 0) {
-          fill("tomato")
+          fill("white")
         } else {
           fill(255, 255, 255, 180)
         }
         if (index == 0) {
           textSize(20)
-          curveVertex(width - index * mulitplier - 50, height - 20 - (diameter / 1.6) / easeValue);
+          // curveVertex(width - index * mulitplier - 50, height - 20 - (diameter / 1.6) / easeValue);
         }
         text(amount, (width - index * mulitplier - 52), height - 20 - (diameter / 1.6) / easeValue)
         if (index % 7 === 0) {
           noFill()
-          stroke(140, 50)
-          strokeWeight(100);
-          curveVertex(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
-
-          point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
+          stroke(255, 0, 0, 100)
+          strokeWeight(40);
+          // curveVertex(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
+          point(width - index * mulitplier - 58 + mulitplier/2, height - 20 - (diameter / 1.6) / easeValue);
+        } else {
+          stroke(255, 70)
+          strokeWeight(10);
+          // point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
         }
       }
 
     })
-  noFill()
-
-  strokeWeight(1);
-  stroke(255, 40)
-  endShape()
+  // noFill()
+  // strokeWeight(19);
+  // stroke(255, 0, 0, 70)
+  // endShape()
 }
 
 function showText() {}
