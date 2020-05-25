@@ -35,7 +35,7 @@ function setup() {
 
   slider = createSlider(0, 5, 0.7, 0.01);
   slider.position(10, 10);
-  slider.style('width', width/2 + 'px');
+  slider.style('width', width /2  + 'px');
 }
 
 function gotData(data) {
@@ -44,7 +44,7 @@ function gotData(data) {
 }
 
 function makeGraph() {
-  background("black");
+  background("white");
   fill(255, 255, 255)
 
   // multiplier allows graph to progress along axis
@@ -72,11 +72,13 @@ function makeGraph() {
       // also use multiplier to determine width of ellipse (with modifier)
       // use diameter value to determine height of ellipse
       // ((index % 7) === 0) ? fill(0) : fill("gray")
-      noStroke()
+      strokeWeight(1);
+    noStroke()
+    stroke("cyan")
       if (index % 7 === 0) {
-        fill("tomato")
+        fill("magenta")
       } else {
-        fill("gray")
+        fill("yellow")
       }
       // rotate(-0.005)
       rect(width - index * mulitplier - 58, height - 20, mulitplier, -(diameter / 1.6) / easeValue, 0, 0, 10, 10)
@@ -84,23 +86,24 @@ function makeGraph() {
         let amount = country.dailyChangeInDeaths.toString();
         textSize(12);
         if (index % 7 === 0) {
-          fill("white")
+          fill("grey")
         } else {
-          fill(255, 255, 255, 180)
+          fill("grey")
         }
         if (index == 0) {
           textSize(20)
           // curveVertex(width - index * mulitplier - 50, height - 20 - (diameter / 1.6) / easeValue);
         }
+        noStroke()
         text(amount, (width - index * mulitplier - 52), height - 20 - (diameter / 1.6) / easeValue)
         if (index % 7 === 0) {
           noFill()
-          stroke(255, 0, 0, 100)
+          stroke(0, 255, 255, 100)
           strokeWeight(40);
           // curveVertex(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
           point(width - index * mulitplier - 58 + mulitplier/2, height - 20 - (diameter / 1.6) / easeValue);
         } else {
-          stroke(255, 70)
+          stroke(255, 255, 0, 70)
           strokeWeight(10);
           // point(width - index * mulitplier - 58, height - 20 - (diameter / 1.6) / easeValue);
         }
