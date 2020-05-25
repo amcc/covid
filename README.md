@@ -13,6 +13,6 @@ _I'm pretty sick of checking stats on complicated ugly pages._ They are often ve
 
 See the graph in action here: https://amcc.github.io/covid
 
-You can see the p5js sketch here: https://editor.p5js.org/amcc/sketches/WZXCnLuXw
+You can see the p5js sketch here: https://editor.p5js.org/amcc/sketches/OqubMXgUh
 
 Feel free to use any of the code
