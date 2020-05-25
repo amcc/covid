@@ -3,6 +3,7 @@ body {
   margin: 0;
   font-family: "Roboto Mono", sans-serif;
   font-weight: 300;
+  
 }
 canvas {
   display: block;
@@ -10,7 +11,7 @@ canvas {
 button {
   border: 0;
   border-radius: 0px;
-  background: gray;
+  background: orange;
   color: white;
   font-size: 1em;
   font-family: "Roboto Mono";
@@ -18,10 +19,10 @@ button {
   transition: all 0.5s ease;
 }
 button:active {
-  background: tomato;
+  background: magenta;
 }
 button:focus {
-  background: tomato;
+  background: magenta;
 }
 #info {
   position: fixed;
